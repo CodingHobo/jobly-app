@@ -1,34 +1,56 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CompanyCard from "./CompanyCard";
+import SearchForm from "./SearchForm";
 
 const URL = 'http://localhost:3001/companies'
 
+
+/** Component to display list of companies
+ *
+ * State:
+ * - companiesList: {companies: [company...]
+ *                   isLoading: determines what get rendered based on value}
+ * - query: term taken from SearchForm and used as value for query parameter
+ *
+ * RoutesList -> CompanyList-> SearchForm/CompanyCard
+ *
+ */
 function CompanyList() {
   const [companiesList, setCompaniesList] = useState({
     companies: null,
     isLoading: true,
   });
+  const [query, setQuery] = useState("");
+
+  async function handleSearch() {
+    const response = await axios.get(`${URL}?nameLike=${query}`);
+    setCompaniesList({
+      companies: response.data.companies
+    });
+  }
 
   useEffect(function fetchCompaniesWhenMounted() {
     async function fetchCompanies() {
-      const companiesResult = await axios.get(URL);
+      const response = await axios.get(URL);
       setCompaniesList({
-        companies: companiesResult.data.companies,
+        companies: response.data.companies,
         isLoading: false,
       });
     }
     fetchCompanies();
   }, [ ]);
-  console.log("companiesList===", companiesList)
-  if (companiesList.isLoading) return <i>Loading...</i>;
 
+  if (companiesList.isLoading) return <i>Loading...</i>;
 
   return (
     <div>
+      <SearchForm handleSearch={handleSearch}
+                  query={query}
+                  queryChange={setQuery}/>
       {companiesList.companies.map(company =>
-<CompanyCard key={company.handle} company={company} />
-      )
+        <CompanyCard key={company.handle} company={company} />
+        )
       }
     </div>
   );
