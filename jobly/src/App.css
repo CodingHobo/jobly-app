@@ -2,6 +2,17 @@
   text-align: center;
 }
 
+body {
+  background-image: url('../public/bg-office.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -12,6 +23,7 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
 
 .App-header {
   background-color: #282c34;
