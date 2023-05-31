@@ -14,19 +14,19 @@ import React from "react";
 
 function SearchForm( { handleSearch, query, queryChange }) {
 
-  /** Send query */
+  /** Perform search with query */
   function handleSubmit(evt) {
     evt.preventDefault();
     handleSearch(query);
   }
 
+  /** Call parent function onChange */
   function handleChange(evt) {
     queryChange(evt.target.value)
   };
 
   /** Render the form */
   return (
-
     <form onSubmit={handleSubmit}>
       <input
         id="search"
@@ -37,7 +37,6 @@ function SearchForm( { handleSearch, query, queryChange }) {
         />
       <button>Submit</button>
     </form>
-
   );
 }
 

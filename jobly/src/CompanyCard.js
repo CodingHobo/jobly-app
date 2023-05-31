@@ -1,5 +1,14 @@
 import React from "react";
 
+
+/** Component to render information about company
+ *
+ * Props: company-like object {handle, name, description, numEmployees, logoUrl}
+ *
+ * CompanyList -> CompanyCard
+ *
+ */
+
 function CompanyCard({company}) {
 return (
 <div>
@@ -8,7 +17,7 @@ return (
   {company.logoUrl &&
   <img src={company.logoUrl} alt={company.name} />}
 </div>
-  )
+  );
 }
 
 export default CompanyCard;

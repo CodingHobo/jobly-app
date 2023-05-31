@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
+import { Link } from "react-router-dom";
 
 const URL = 'http://localhost:3001/companies'
 
@@ -16,6 +17,7 @@ const URL = 'http://localhost:3001/companies'
  * RoutesList -> CompanyList-> SearchForm/CompanyCard
  *
  */
+
 function CompanyList() {
   const [companiesList, setCompaniesList] = useState({
     companies: null,
@@ -23,16 +25,16 @@ function CompanyList() {
   });
   const [query, setQuery] = useState("");
 
+  /** Perform get request to /companies with query param nameLike */
   async function handleSearch() {
     if (query !== "") {
-    const response = await axios.get(`${URL}?nameLike=${query}`);
-    setCompaniesList({
-      companies: response.data.companies
-    });
-  } setQuery("");
-  }
+      const response = await axios.get(`${URL}?nameLike=${query}`);
+      setCompaniesList({companies: response.data.companies});
+    };
+    setQuery("");
+  };
 
-
+  /** Make get request and update companiesList upon mount */
   useEffect(function fetchCompaniesWhenMounted() {
     async function fetchCompanies() {
       const response = await axios.get(URL);
@@ -40,7 +42,7 @@ function CompanyList() {
         companies: response.data.companies,
         isLoading: false,
       });
-    }
+    };
     fetchCompanies();
   }, [ ]);
 
@@ -52,7 +54,9 @@ function CompanyList() {
                   query={query}
                   queryChange={setQuery}/>
       {companiesList.companies.map(company =>
-        <CompanyCard key={company.handle} company={company} />
+        <Link to={`/companies/${company.handle}`}>
+          <CompanyCard key={company.handle} company={company} />
+        </Link>
         )
       }
     </div>

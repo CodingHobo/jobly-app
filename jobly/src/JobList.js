@@ -16,6 +16,7 @@ const URL = 'http://localhost:3001/jobs'
  * RoutesList -> JobList-> SearchForm/JobCard
  *
  */
+
 function JobList() {
   const [jobsList, setJobsList] = useState({
     jobs: null,
@@ -23,16 +24,16 @@ function JobList() {
   });
   const [query, setQuery] = useState("");
 
+  /** Perform get request to /jobs with query param title */
   async function handleSearch() {
     if (query !== "") {
-    const response = await axios.get(`${URL}?title=${query}`);
-    setJobsList({
-      jobs: response.data.jobs
-    });
-  } setQuery("");
-  }
+      const response = await axios.get(`${URL}?title=${query}`);
+      setJobsList({jobs: response.data.jobs});
+    };
+    setQuery("");
+  };
 
-
+  /** Make get request and update jobsList upon mount */
   useEffect(function fetchJobsWhenMounted() {
     async function fetchJobs() {
       const response = await axios.get(URL);
@@ -40,7 +41,7 @@ function JobList() {
         jobs: response.data.jobs,
         isLoading: false,
       });
-    }
+    };
     fetchJobs();
   }, [ ]);
 
@@ -53,10 +54,10 @@ function JobList() {
                   queryChange={setQuery}/>
       {jobsList.jobs.map(job =>
         <JobCard key={job.id}
-                  title={job.title}
-                  companyName={job.companyName}
-                  salary={job.salary}
-                  equity={job.equity} />
+                 title={job.title}
+                 companyName={job.companyName}
+                 salary={job.salary}
+                 equity={job.equity} />
         )
       }
     </div>

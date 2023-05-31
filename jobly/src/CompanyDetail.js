@@ -5,6 +5,17 @@ import { useParams } from 'react-router-dom';
 
 const URL = 'http://localhost:3001/companies/'
 
+
+/** Component to display details for company
+ *
+ * State:
+ * - compDetails: {company: {company info..., [jobs]}
+ *                 isLoading: determines what get rendered based on value}
+ *
+ * RoutesList -> CompanyList-> CompanyDetail
+ *
+ */
+
 function CompanyDetail() {
   const [compDetails, setCompDetails] = useState({
     company: null,
@@ -13,6 +24,7 @@ function CompanyDetail() {
 
   const {handle} = useParams();
 
+  /** Make get request and update compDetails upon mount */
   useEffect(function fetchCompDetailsWhenMounted() {
     async function fetchCompDetail() {
       const response = await axios.get(`${URL}${handle}`);
@@ -20,7 +32,7 @@ function CompanyDetail() {
         company: response.data.company,
         isLoading: false,
       });
-    }
+    };
     fetchCompDetail();
   }, [ ]);
 
