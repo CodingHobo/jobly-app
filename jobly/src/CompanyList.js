@@ -24,11 +24,14 @@ function CompanyList() {
   const [query, setQuery] = useState("");
 
   async function handleSearch() {
+    if (query !== "") {
     const response = await axios.get(`${URL}?nameLike=${query}`);
     setCompaniesList({
       companies: response.data.companies
     });
+  } setQuery("");
   }
+
 
   useEffect(function fetchCompaniesWhenMounted() {
     async function fetchCompanies() {
