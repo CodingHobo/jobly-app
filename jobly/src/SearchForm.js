@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 
 /** Form for searching/filtering companies/jobs
@@ -12,17 +12,19 @@ import React from "react";
  *
  */
 
-function SearchForm( { handleSearch, query, queryChange }) {
+function SearchForm( { handleSearch }) {
+  const [searchTerm, setSearchTerm] = useState();
 
   /** Perform search with query */
   function handleSubmit(evt) {
     evt.preventDefault();
-    handleSearch(query);
+    handleSearch(searchTerm || undefined);
+    setSearchTerm("");
   }
 
   /** Call parent function onChange */
   function handleChange(evt) {
-    queryChange(evt.target.value)
+    setSearchTerm(evt.target.value)
   };
 
   /** Render the form */
@@ -31,7 +33,7 @@ function SearchForm( { handleSearch, query, queryChange }) {
       <input
         id="search"
         name="search"
-        value={query}
+        value={searchTerm}
         placeholder="Enter search term..."
         onChange={handleChange}
         />
