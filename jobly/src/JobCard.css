@@ -1,8 +1,8 @@
-.company-card-container a {
+.job-card-container a {
     text-decoration: none;
 }
 
-.company-card {
+.job-card {
     background-color: rgba(255, 255, 255, 0.9); /* Add opacity */
     text-align: left;
     width: 50%;
@@ -13,7 +13,7 @@
     display: inline-block;
 }
 
-.company-card img {
+.job-card img {
     position: absolute;
     top: 0;
     right: 0;

@@ -36,7 +36,7 @@ function CompanyList() {
       companies: response,
       isLoading: false,
     });
-  };
+  }
 
   if (companiesList.isLoading) return <i>Loading...</i>;
 
@@ -44,12 +44,8 @@ function CompanyList() {
     <div>
       <SearchForm handleSearch={searchCompanies} />
       {companiesList.companies.map((company) => (
-        <div key={company.handle}>
-          <Link to={`/companies/${company.handle}`}>
-            <CompanyCard company={company} />
-          </Link>
-        </div>
-      ))};
+        <CompanyCard key={company.handle} company={company} /> // remove the Link and div here
+      ))}
     </div>
   );
 }

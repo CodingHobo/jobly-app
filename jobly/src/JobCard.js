@@ -1,4 +1,5 @@
 import React from "react";
+import './JobCard.css'
 
 
 /** Component to render information about job
@@ -13,15 +14,18 @@ import React from "react";
  *
  */
 
-function JobCard({ title, companyName, salary, equity }) {
+
+function JobCard({ title, salary, equity }) {
   return (
-    <div>
-      <h3>{title}</h3>
-      <p>{companyName}</p>
-      {salary && <p>Salary: {salary}</p>}
-      <p>Equity: {equity}</p>
+    <div className="job-card-container">
+      <div className="job-card">
+        <h3>{title}</h3>
+        <p>Salary: {salary}</p>
+        <p>Equity: {equity}</p>
+      </div>
     </div>
   );
 }
 
 export default JobCard;
+
