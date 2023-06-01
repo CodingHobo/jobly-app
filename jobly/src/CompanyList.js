@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
-import { Link } from "react-router-dom";
 import JoblyApi from "./api";
 
 
