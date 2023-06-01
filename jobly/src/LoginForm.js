@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useNavigate } from "react-router-dom";
 
 
 /** Form for login.
@@ -16,11 +17,14 @@ function LoginForm({ handleLogin }) {
                          password: ""};
   const [loginData, setLoginData] = useState(initialFormData);
 
+  const navigate = useNavigate();
+
   /** Call parent function and clear form. */
   function handleSubmit(evt) {
     evt.preventDefault();
     handleLogin(loginData);
     setLoginData(initialFormData);
+    navigate("/");
   }
 
   /** Update form input. */

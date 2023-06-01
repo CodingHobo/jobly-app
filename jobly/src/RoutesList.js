@@ -7,20 +7,21 @@ import Homepage from "./Homepage";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 
+
 /** List of routes for Jobly
  *
  * app -> RoutesList -> Homepage/CompanyList/JobList/CompanyDetail
  *
  */
 
-function RoutesList() {
+function RoutesList({login, signup}) {
   return (
     <Routes>
       <Route path="/companies" element={<CompanyList />} />
       <Route path="/jobs" element={<JobList />} />
       <Route path="/companies/:handle" element={<CompanyDetail />} />
-      <Route path="/login" element={<LoginForm />} />
-      <Route path="/signup" element={<SignupForm />} />
+      <Route path="/login" element={<LoginForm handleLogin={login}/>} />
+      <Route path="/signup" element={<SignupForm handleSignup={signup}/>} />
       {/* <Route path="/profile" element={<ProfileForm />} /> */}
       <Route path="/" element={<Homepage />} />
       <Route path="*" element={<Navigate to="/" />} />
