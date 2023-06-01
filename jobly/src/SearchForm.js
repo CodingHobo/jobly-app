@@ -5,8 +5,9 @@ import React, { useState } from "react";
  *
  * Props:
  * - handleSearch: function to call in parent to handleSubmit
- * - query: state passed from parent
- * - queryChange: function to call in parent to handleChange
+ *
+ * State:
+ * - searchTerm: term used to filter upon submit
  *
  * CompanyList/JobList -> SearchForm
  *

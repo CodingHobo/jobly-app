@@ -1,8 +1,11 @@
 import { NavLink } from "react-router-dom";
 import "./Navigation.css"
 
-/** Navigation bar with links for Jobly */
-// TODO: Parent -> etc
+/** Navigation bar with links for Jobly
+ *
+ * App -> Navigation
+ *
+ */
 
 function Navigation() {
   return (

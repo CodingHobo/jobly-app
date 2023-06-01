@@ -5,8 +5,12 @@ import JobList from "./JobList";
 import CompanyDetail from "./CompanyDetail";
 import Homepage from "./Homepage";
 
-/** List of routes for Jobly */
-//TODO: Parent/ etc props 
+/** List of routes for Jobly
+ *
+ * app -> RoutesList -> Homepage/CompanyList/JobList/CompanyDetail
+ *
+ */
+
 function RoutesList() {
   return (
     <Routes>

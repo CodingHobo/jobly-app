@@ -4,14 +4,12 @@ import SearchForm from "./SearchForm";
 import { Link } from "react-router-dom";
 import JoblyApi from "./api";
 
-const URL = "http://localhost:3001/companies";
 
 /** Component to display list of companies
  *
  * State:
  * - companiesList: {companies: [company...]
  *                   isLoading: determines what get rendered based on value}
- * - query: term taken from SearchForm and used as value for query parameter
  *
  * RoutesList -> CompanyList-> SearchForm/CompanyCard
  *
@@ -23,15 +21,6 @@ function CompanyList() {
     isLoading: true,
   });
 
-  /** Perform get request to /companies with query param nameLike */
-  // async function handleSearch() {
-  //   if (query !== "") {
-  //     const response = await axios.get(`${URL}?nameLike=${query}`);
-  //     setCompaniesList({companies: response.data.companies});
-  //   };
-  //   setQuery("");
-  // };
-
   /** Make get request and update companiesList upon mount */
   useEffect(function fetchCompaniesWhenMounted() {
     async function fetchCompanies() {
@@ -40,14 +29,14 @@ function CompanyList() {
     fetchCompanies();
   }, []);
 
-  async function searchCompanies(name) {
-    const comps = await JoblyApi.getCompanies(name);
-    console.log("comps ===", comps);
+  /** Perform search with argument */
+  async function searchCompanies(query) {
+    const response = await JoblyApi.getCompanies(query);
     setCompaniesList({
-      companies: comps,
+      companies: response,
       isLoading: false,
     });
-  }
+  };
 
   if (companiesList.isLoading) return <i>Loading...</i>;
 
@@ -55,10 +44,12 @@ function CompanyList() {
     <div>
       <SearchForm handleSearch={searchCompanies} />
       {companiesList.companies.map((company) => (
-        <Link to={`/companies/${company.handle}`}>
-          <CompanyCard key={company.handle} company={company} />
-        </Link>
-      ))}
+        <div key={company.handle}>
+          <Link to={`/companies/${company.handle}`}>
+            <CompanyCard company={company} />
+          </Link>
+        </div>
+      ))};
     </div>
   );
 }
