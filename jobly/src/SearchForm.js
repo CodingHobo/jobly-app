@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './SearchForm.css'; // import the css file
 
 
 /** Form for searching/filtering companies/jobs
@@ -30,17 +31,18 @@ function SearchForm( { handleSearch }) {
 
   /** Render the form */
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="search-form">
       <input
         id="search"
         name="search"
         value={searchTerm}
         placeholder="Enter search term..."
         onChange={handleChange}
-        />
+      />
       <button>Submit</button>
     </form>
   );
 }
 
 export default SearchForm;
+
