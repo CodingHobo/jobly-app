@@ -1,9 +1,11 @@
 nav {
   background-color: rgb(42, 40, 42);
-  text-align: center;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 18px;
   border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 nav a {
@@ -15,11 +17,15 @@ nav a {
 }
 
 nav a.active {
-  color: rgb(114, 175, 97);
+  color: rgb(255, 184, 4);
   text-decoration: none;
 }
 
 nav a:hover {
   color: rgb(255, 184, 4);
   text-decoration: none;
+}
+
+.yes-curr-user {
+justify-content: right;
 }

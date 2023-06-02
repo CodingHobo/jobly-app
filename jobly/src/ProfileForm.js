@@ -102,7 +102,7 @@ function ProfileForm({ handleUpdate }) {
           <Alert variant="success">Updated successfully.</Alert>
         }
 
-        <Button variant="primary" type="submit">Submit</Button>
+        <Button variant="outline-dark" type="submit">Submit</Button>
 
       </Form>
   </div>

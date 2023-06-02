@@ -39,7 +39,7 @@ function SearchForm( { handleSearch }) {
         placeholder="Enter search term..."
         onChange={handleChange}
       />
-      <button>Submit</button>
+      <button>Search</button>
     </form>
   );
 }

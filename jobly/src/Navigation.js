@@ -21,7 +21,7 @@ function Navigation({ logout }) {
   return (
     <nav className="NavBar">
       <NavLink to="/" end>
-        Jobly
+       <h2> Jobly</h2>
       </NavLink>
       {!currUser &&
         <div className="no-curr-user">

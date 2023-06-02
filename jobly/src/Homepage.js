@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import userContext from "./userContext";
+import "./Homepage.css";
 
 /** Homepage for Jobly
  *
@@ -14,22 +15,22 @@ function Homepage() {
   const { currUser } = useContext(userContext);
 
   return (
-    <div>
+    <div className="home">
       <h1>Jobly</h1>
-      <p>All the jobs in one, convenient place.</p>
-      {currUser &&
-      <h3>Welcome, {currUser.username}!</h3>}
-      {!currUser &&
-      <p>
-        <a className="btn btn-primary fw-bold me-3" href="/login">
-          Log in
-        </a>
-        <a className="btn btn-primary fw-bold" href="/signup">
-          Sign up
+      <p>Get a job!</p>
+      {currUser && <h3>Welcome, {currUser.username}!</h3>}
+      {!currUser && (
+        <p>
+          <a className="btn fw-bold m-1 btn-outline-dark" href="/login">
+            Log in
           </a>
-      </p>}
+          <a className="btn fw-bold m-1 btn-outline-dark" href="/signup">
+            Sign up
+          </a>
+        </p>
+      )}
     </div>
-    )
-  }
+  );
+}
 
-  export default Homepage;
+export default Homepage;
