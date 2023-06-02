@@ -17,7 +17,7 @@ function Homepage() {
   return (
     <div className="home">
       <h1>Jobly</h1>
-      <p>Get a job!</p>
+      <h3>Get a job!</h3>
       {currUser && <h3>Welcome, {currUser.username}!</h3>}
       {!currUser && (
         <p>

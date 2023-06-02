@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Alert from "react-bootstrap/Alert"
 import { useNavigate } from "react-router-dom";
+import "./LoginForm.css";
 
 
 /** Form for login.
@@ -75,7 +76,7 @@ function LoginForm({ handleLogin }) {
           error.map((e, i) => <Alert key={i} variant="danger">{e}</Alert>)
         }
 
-        <Button variant="primary" type="submit">Submit</Button>
+        <Button variant="outline-dark" type="submit">Submit</Button>
 
       </Form>
   </div>

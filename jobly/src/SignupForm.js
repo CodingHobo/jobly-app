@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert"
 import { useNavigate } from "react-router-dom";
+import "./SignupForm.css";
 
 /** Form for signing up.
  *
@@ -53,7 +54,7 @@ function SignupForm({ handleSignup }) {
 
   return (
     <div className="SignupPage">
-      <h1>Log In</h1>
+      <h1>Sign Up</h1>
       <Form className="SignupForm" onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="signupUsername">
           <Form.Label>Username</Form.Label>
@@ -114,7 +115,7 @@ function SignupForm({ handleSignup }) {
           error.map((e, i) => <Alert key={i} variant="danger">{e}</Alert>)
         }
 
-        <Button variant="primary" type="submit">Submit</Button>
+        <Button variant="outline-dark" type="submit">Submit</Button>
 
       </Form>
     </div>

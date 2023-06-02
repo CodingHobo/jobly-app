@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Alert from "react-bootstrap/Alert"
 import userContext from "./userContext";
+import "./ProfileForm.css";
 
 
 /** Form for updating user information.
