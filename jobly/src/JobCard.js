@@ -15,11 +15,12 @@ import './JobCard.css'
  */
 
 
-function JobCard({ title, salary, equity }) {
+function JobCard({ title, salary, equity, companyName }) {
   return (
     <div className="job-card-container">
       <div className="job-card">
         <h3>{title}</h3>
+        <h5>{companyName}</h5>
         <p>Salary: {salary}</p>
         <p>Equity: {equity}</p>
       </div>

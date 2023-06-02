@@ -2,7 +2,17 @@ import React, { useEffect, useState } from 'react';
 import JobCard from './JobCard';
 import { useParams } from 'react-router-dom';
 import JoblyApi from './api';
-import './CompanyCard.css'; // import the css file
+import './CompanyCard.css';
+
+/** Component to display details about jobs for specific company
+ *
+ * State:
+ * - compDetails: { company: { companyInfo..., [Jobs...] }
+ *                   isLoading: determines what get rendered based on value}
+ *
+ * RoutesList/CompanyList -> CompanyDetails -> JobCard
+ *
+ */
 
 function CompanyDetail() {
   const [compDetails, setCompDetails] = useState({
@@ -30,7 +40,7 @@ function CompanyDetail() {
       <div >
         <h2>{compDetails.company.name}</h2>
         <p>{compDetails.company.description}</p>
-        
+
         <div>
           {compDetails.company.jobs.map(job =>
             <JobCard key={job.id}

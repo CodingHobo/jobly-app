@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
  * Props:
  * - handleSignup: function to call in parent.
  *
+ * State:
+ * - signupData: { username, password, firstName, lastName, email }
+ *
  * App -> RoutesList -> SignupForm
  */
 

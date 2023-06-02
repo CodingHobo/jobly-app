@@ -9,6 +9,9 @@ import { useNavigate } from "react-router-dom";
  * Props:
  * - handleLogin: function to call in parent.
  *
+ * State:
+ * - loginData: { username, password }
+ *
  * App -> RoutesList -> LoginForm
  */
 

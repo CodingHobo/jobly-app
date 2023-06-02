@@ -43,7 +43,7 @@ function CompanyList() {
     <div>
       <SearchForm handleSearch={searchCompanies} />
       {companiesList.companies.map((company) => (
-        <CompanyCard key={company.handle} company={company} /> // remove the Link and div here
+        <CompanyCard key={company.handle} company={company} /> 
       ))}
     </div>
   );

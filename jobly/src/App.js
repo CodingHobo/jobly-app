@@ -8,16 +8,21 @@ import JoblyApi from "./api";
 import jwt_decode from "jwt-decode";
 import userContext from "./userContext";
 
+
 /** Compiles Jobly App
  *
  * state:
- * - token:
- * - currUser:
+ * - token: initial state set to value of token in localStorage
+ * - currUser: { userDetails... } //TODO: add userDetail info
+ * - isLoading: initial value true; changes to false after App user data is loaded;
+ *
+ * App -> Navigation / RoutesList
 */
 
 function App() {
-  const [ token, setToken ] = useState("");
+  const [ token, setToken ] = useState(localStorage.getItem("joblyToken"));
   const [currUser, setCurrUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   /** useEffect to check state of token.
    * If token, decode token as payload.
@@ -32,12 +37,24 @@ function App() {
 
         const user = await JoblyApi.getUser(payload.username);
         setCurrUser(user);
+        setIsLoading(false);
       } else {
         setCurrUser(null);
+        setIsLoading(false);
       }
     }
    decodeToken();
   }, [token])
+
+  // Store the token in localStorage
+  useEffect(function updateLocalStorage() {
+    if (token) {
+      localStorage.setItem('joblyToken', token);
+    } else {
+      localStorage.removeItem('joblyToken');
+    }
+  }, [token]);
+
 
   /** Make request to login, set response as token. */
   async function login(data) {
@@ -57,7 +74,8 @@ function App() {
      setToken("");
   };
 
-  //TODO: add isloading and then remove after next part
+  if (isLoading) return <i>Loading...</i>;
+
   return (
     <div className="App">
       <userContext.Provider value={{currUser}}>
