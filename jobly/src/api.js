@@ -11,14 +11,6 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
  */
 
 class JoblyApi {
-  // Remember, the backend needs to be authorized with a token
-  // We're providing a token you can use to interact with the backend API
-  // DON'T MODIFY THIS TOKEN
-  // static token =
-  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-  //   "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-  //   "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
-
   static token = "";
 
   static async request(endpoint, data = {}, method = "get") {
@@ -57,21 +49,26 @@ class JoblyApi {
     return res.jobs;
   }
 
+  /** Return token when creating a new user. */
   static async register({ username, password, firstName, lastName, email }) {
     let res = await this.request(
       "auth/register",
       { username, password, firstName, lastName, email },
       "post"
     );
-    JoblyApi.token = res.token;
     return res.token;
   }
 
+  /** Return token when logging in as existing user. */
   static async login({ username, password }) {
     let res = await this.request("auth/token", { username, password }, "post");
-    JoblyApi.token = res.token;
-    console.log("JoblyApi.token=== ", JoblyApi.token);
     return res.token;
+  }
+
+  /** Get details on specific user. */
+  static async getUser(username) {
+    let res = await this.request(`users/${username}`);
+    return res.user;
   }
 }
 

@@ -10,7 +10,11 @@ import SignupForm from "./SignupForm";
 
 /** List of routes for Jobly
  *
- * app -> RoutesList -> Homepage/CompanyList/JobList/CompanyDetail
+ * props:
+ * - login: function to handle login form submit passed from app
+ * - signup: function to handle signup form submit passed from app
+ *
+ * app -> RoutesList -> Homepage/CompanyList/JobList/CompanyDetail/LoginForm/SignupForm/Profile
  *
  */
 

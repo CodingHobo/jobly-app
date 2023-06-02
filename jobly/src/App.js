@@ -5,56 +5,67 @@ import RoutesList from "./RoutesList";
 import Navigation from "./Navigation";
 import 'bootstrap/dist/css/bootstrap.css';
 import JoblyApi from "./api";
-import jwt_decode from "jwt-decode"
-
-
+import jwt_decode from "jwt-decode";
 import userContext from "./userContext";
 
-/** Compiles Jobly App */
+/** Compiles Jobly App
+ *
+ * state:
+ * - token:
+ * - currUser:
+*/
+
 function App() {
   const [ token, setToken ] = useState("");
   const [currUser, setCurrUser] = useState(null);
 
-  /** useEffect to check state of token
-   * if token, use jwt-decode and set state for currUser to decode payload
-   *
-*/
-
+  /** useEffect to check state of token.
+   * If token, decode token as payload.
+   * Make axios request with payload.username.
+   * Set response as currUser.
+   */
   useEffect(function checkToken() {
-    function decodeToken() {
+    async function decodeToken() {
       if (token) {
         const payload = jwt_decode(token);
-        setCurrUser(payload.username);
-      };
+        JoblyApi.token = token;
+
+        const user = await JoblyApi.getUser(payload.username);
+        setCurrUser(user);
+      } else {
+        setCurrUser(null);
+      }
     }
    decodeToken();
-  }, [])
+  }, [token])
 
-async function login(data) {
+  /** Make request to login, set response as token. */
+  async function login(data) {
+    //TODO: add error catching for all api requests to account for 504
     const resp = await JoblyApi.login(data);
-    if (resp) {
-      setToken(resp);
-    }
-  }
+    setToken(resp);
+  };
 
+  /** Make request to sign up, set response as token. */
   async function signup(data) {
     const resp = await JoblyApi.register(data);
       setToken(resp);
-  }
+  };
 
+  /** Log out user, reset token. */
   function logout() {
-    if (currUser) {
-     setCurrUser(null);
      setToken("");
-    }
-  }
+  };
 
+  //TODO: add isloading and then remove after next part
   return (
     <div className="App">
-      <BrowserRouter>
-        <Navigation currUser={currUser}/>
-        <RoutesList login={login} signup={signup}/>
-      </BrowserRouter>
+      <userContext.Provider value={{currUser}}>
+        <BrowserRouter>
+          <Navigation logout={logout}/>
+          <RoutesList login={login} signup={signup}/>
+        </BrowserRouter>
+      </userContext.Provider>
     </div>
   );
 }

@@ -14,15 +14,20 @@ import { useNavigate } from "react-router-dom";
 
 function LoginForm({ handleLogin }) {
   const initialFormData = { username: "",
-                         password: ""};
+                            password: ""};
   const [loginData, setLoginData] = useState(initialFormData);
 
   const navigate = useNavigate();
 
   /** Call parent function and clear form. */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    handleLogin(loginData);
+    try {
+      await handleLogin(loginData);
+    } catch(error) {
+      alert(error);
+      return
+    }
     setLoginData(initialFormData);
     navigate("/");
   }
@@ -40,22 +45,20 @@ function LoginForm({ handleLogin }) {
     <div className="LoginPage">
       <h1>Log In</h1>
       <Form className="LoginForm" onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" controlId="loginUsername">
           <Form.Label>Username</Form.Label>
           <Form.Control
               type="text"
-              id="username"
               name="username"
               placeholder="Username"
               onChange={handleChange}
               value={loginData.username} />
         </Form.Group>
 
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" controlId="loginPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
               type="password"
-              id="password"
               name="password"
               placeholder="Password"
               onChange={handleChange}
@@ -63,6 +66,7 @@ function LoginForm({ handleLogin }) {
         </Form.Group>
 
         <Button variant="primary" type="submit">Submit</Button>
+
       </Form>
   </div>
   )

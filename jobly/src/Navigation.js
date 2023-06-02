@@ -1,13 +1,23 @@
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import userContext from "./userContext";
 import "./Navigation.css"
 
 /** Navigation bar with links for Jobly
+ *
+ * props:
+ * - logout: function passed from App
+ *
+ * context:
+ * - currUser: current user data
  *
  * App -> Navigation
  *
  */
 
-function Navigation({ currUser }) {
+function Navigation({ logout }) {
+  const { currUser } = useContext(userContext);
+
   return (
     <nav className="NavBar">
       <NavLink to="/" end>
@@ -34,7 +44,9 @@ function Navigation({ currUser }) {
           <NavLink to="/profile" end>
             Profile
           </NavLink>
-          {/* enter useNavigate/Navigate to redirect home and setCurrUser to null */}
+          <NavLink to="/" onClick={logout} end>
+            Log out {currUser.username}
+          </NavLink>
         </div>
       }
     </nav>

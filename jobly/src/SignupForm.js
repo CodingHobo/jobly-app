@@ -24,9 +24,14 @@ function SignupForm({ handleSignup }) {
   const navigate = useNavigate();
 
   /** Call parent function and clear form. */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    handleSignup(signupData);
+    try {
+      await handleSignup(signupData);
+    } catch(error) {
+      alert(error);
+      return
+    }
     setSignupData(initialFormData);
     navigate("/");
   }
@@ -44,11 +49,10 @@ function SignupForm({ handleSignup }) {
     <div className="SignupPage">
       <h1>Log In</h1>
       <Form className="SignupForm" onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" controlId="signupUsername">
           <Form.Label>Username</Form.Label>
           <Form.Control
             type="text"
-            id="username"
             name="username"
             placeholder="Username"
             onChange={handleChange}
@@ -56,11 +60,10 @@ function SignupForm({ handleSignup }) {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" controlId="signupPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
-            id="password"
             name="password"
             placeholder="Password"
             onChange={handleChange}
@@ -68,11 +71,10 @@ function SignupForm({ handleSignup }) {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" controlId="signupFirstName">
           <Form.Label>First Name</Form.Label>
           <Form.Control
             type="text"
-            id="first-name"
             name="firstName"
             placeholder="First Name"
             onChange={handleChange}
@@ -80,11 +82,10 @@ function SignupForm({ handleSignup }) {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" controlId="signupLastName">
           <Form.Label>Last Name</Form.Label>
           <Form.Control
             type="text"
-            id="last-name"
             name="lastName"
             placeholder="Last Name"
             onChange={handleChange}
@@ -92,11 +93,10 @@ function SignupForm({ handleSignup }) {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" controlId="signupEmail">
           <Form.Label>Email</Form.Label>
           <Form.Control
             type="email"
-            id="email"
             name="email"
             placeholder="Email"
             onChange={handleChange}
@@ -104,9 +104,8 @@ function SignupForm({ handleSignup }) {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
+        <Button variant="primary" type="submit">Submit</Button>
+
       </Form>
     </div>
   );
