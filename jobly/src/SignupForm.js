@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Alert from "react-bootstrap/Alert"
 import { useNavigate } from "react-router-dom";
 
 /** Form for signing up.
@@ -10,6 +11,7 @@ import { useNavigate } from "react-router-dom";
  *
  * State:
  * - signupData: { username, password, firstName, lastName, email }
+ * - error: initially [], changes to array of error messages if errors encountered
  *
  * App -> RoutesList -> SignupForm
  */
@@ -23,6 +25,7 @@ function SignupForm({ handleSignup }) {
     email: "",
   };
   const [signupData, setSignupData] = useState(initialFormData);
+  const [error, setError] = useState([]);
 
   const navigate = useNavigate();
 
@@ -31,8 +34,8 @@ function SignupForm({ handleSignup }) {
     evt.preventDefault();
     try {
       await handleSignup(signupData);
-    } catch(error) {
-      alert(error);
+    } catch(err) {
+      setError(err);
       return
     }
     setSignupData(initialFormData);
@@ -106,6 +109,10 @@ function SignupForm({ handleSignup }) {
             value={signupData.email}
           />
         </Form.Group>
+
+        {error.length > 0 &&
+          error.map((e, i) => <Alert key={i} variant="danger">{e}</Alert>)
+        }
 
         <Button variant="primary" type="submit">Submit</Button>
 

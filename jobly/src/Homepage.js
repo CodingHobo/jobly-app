@@ -18,7 +18,7 @@ function Homepage() {
       <h1>Jobly</h1>
       <p>All the jobs in one, convenient place.</p>
       {currUser &&
-      <h3>Welcome back, {currUser.username}</h3>}
+      <h3>Welcome, {currUser.username}!</h3>}
       {!currUser &&
       <p>
         <a className="btn btn-primary fw-bold me-3" href="/login">

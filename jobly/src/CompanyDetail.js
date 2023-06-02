@@ -7,8 +7,9 @@ import './CompanyCard.css';
 /** Component to display details about jobs for specific company
  *
  * State:
- * - compDetails: { company: { companyInfo..., [Jobs...] }
- *                   isLoading: determines what get rendered based on value}
+ * - compDetails: { company: { handle, name, description, numEmployees, logoUrl,
+ *                  jobs: [{id, title, salary, equity}]}
+ *                  isLoading: determines what get rendered based on value}
  *
  * RoutesList/CompanyList -> CompanyDetails -> JobCard
  *

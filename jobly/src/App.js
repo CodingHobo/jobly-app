@@ -12,9 +12,9 @@ import userContext from "./userContext";
 /** Compiles Jobly App
  *
  * state:
- * - token: initial state set to value of token in localStorage
- * - currUser: { userDetails... } //TODO: add userDetail info
- * - isLoading: initial value true; changes to false after App user data is loaded;
+ * - token: token received from backend, initial state set to value of joblyToken in localStorage
+ * - currUser: { username, firstName, lastName, email, isAdmin }
+ * - isLoading: initial value true, changes to false after App user data is loaded
  *
  * App -> Navigation / RoutesList
 */
@@ -23,6 +23,7 @@ function App() {
   const [ token, setToken ] = useState(localStorage.getItem("joblyToken"));
   const [currUser, setCurrUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  console.log("currUser=", currUser)
 
   /** useEffect to check state of token.
    * If token, decode token as payload.
@@ -46,7 +47,7 @@ function App() {
    decodeToken();
   }, [token])
 
-  // Store the token in localStorage
+  /** Set joblyToken in localStorage to value of token */
   useEffect(function updateLocalStorage() {
     if (token) {
       localStorage.setItem('joblyToken', token);
@@ -66,8 +67,14 @@ function App() {
   /** Make request to sign up, set response as token. */
   async function signup(data) {
     const resp = await JoblyApi.register(data);
-      setToken(resp);
+    setToken(resp);
   };
+
+  /** Make request to update user information, set response as currUser */
+  async function update(data) {
+    const resp = await JoblyApi.update(data);
+    setCurrUser(resp);
+  }
 
   /** Log out user, reset token. */
   function logout() {
@@ -81,7 +88,7 @@ function App() {
       <userContext.Provider value={{currUser}}>
         <BrowserRouter>
           <Navigation logout={logout}/>
-          <RoutesList login={login} signup={signup}/>
+          <RoutesList login={login} signup={signup} update={update}/>
         </BrowserRouter>
       </userContext.Provider>
     </div>

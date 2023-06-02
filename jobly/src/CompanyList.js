@@ -7,7 +7,8 @@ import JoblyApi from "./api";
 /** Component to display list of companies
  *
  * State:
- * - companiesList: {companies: [company...]
+ * - companiesList: {companies: [{handle, name, description,
+ *                                numEmployees, logoUrl }, ...] }
  *                   isLoading: determines what get rendered based on value}
  *
  * RoutesList -> CompanyList-> SearchForm/CompanyCard
@@ -43,7 +44,7 @@ function CompanyList() {
     <div>
       <SearchForm handleSearch={searchCompanies} />
       {companiesList.companies.map((company) => (
-        <CompanyCard key={company.handle} company={company} /> 
+        <CompanyCard key={company.handle} company={company} />
       ))}
     </div>
   );

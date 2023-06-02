@@ -7,7 +7,8 @@ import JoblyApi from "./api";
 /** Component to display list of jobs
  *
  * State:
- * - jobsList: {jobs: [Job...]
+ * - jobsList: {jobs: [{id, title, salary, equity,
+ *                      companyHandle, companyName }, ...}]}
  *                   isLoading: determines what get rendered based on value}
  *
  * RoutesList -> JobList-> SearchForm/JobCard

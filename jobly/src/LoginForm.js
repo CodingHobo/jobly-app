@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Alert from "react-bootstrap/Alert"
 import { useNavigate } from "react-router-dom";
 
 
@@ -11,6 +12,7 @@ import { useNavigate } from "react-router-dom";
  *
  * State:
  * - loginData: { username, password }
+ * - error: initially [], changes to array of error messages if errors encountered
  *
  * App -> RoutesList -> LoginForm
  */
@@ -19,6 +21,7 @@ function LoginForm({ handleLogin }) {
   const initialFormData = { username: "",
                             password: ""};
   const [loginData, setLoginData] = useState(initialFormData);
+  const [error, setError] = useState([]);
 
   const navigate = useNavigate();
 
@@ -27,8 +30,8 @@ function LoginForm({ handleLogin }) {
     evt.preventDefault();
     try {
       await handleLogin(loginData);
-    } catch(error) {
-      alert(error);
+    } catch(err) {
+      setError(err)
       return
     }
     setLoginData(initialFormData);
@@ -67,6 +70,10 @@ function LoginForm({ handleLogin }) {
               onChange={handleChange}
               value={loginData.password} />
         </Form.Group>
+
+        {error.length > 0 &&
+          error.map((e, i) => <Alert key={i} variant="danger">{e}</Alert>)
+        }
 
         <Button variant="primary" type="submit">Submit</Button>
 
